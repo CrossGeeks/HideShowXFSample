@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HideShowXF.Views.MainPageCarousel"
+             xmlns:local="clr-namespace:HideShowXF.Views.CarouselViews.Templates">
+    <ContentPage.Resources>
+      <ResourceDictionary>
+        <local:CarouselDataTemplateSelector x:Key="CarouselDataTemplateSelector"/>
+      </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Padding="20"
+              ColumnDefinitions="*, *"
+              RowDefinitions="Auto, *">
+
+        <Button Text="Tab1"
+                Style="{StaticResource ButtonDisabledStyle}"
+                Grid.Row="0"
+                Grid.Column="0"
+                Command="{Binding SelectItemCommand}"
+                CommandParameter="0">
+            <Button.Triggers>
+                         <DataTrigger TargetType="Button"
+                                      Binding="{Binding PositionSelected}"
+                                      Value="0">
+                    <Setter Property="Style" Value="{StaticResource ButtonStyle}" />
+                </DataTrigger>
+             </Button.Triggers>
+        </Button>
+
+        <Button Text="Tab2"
+                Style="{StaticResource ButtonDisabledStyle}"
+                Grid.Row="0"
+                Grid.Column="1"
+                Command="{Binding SelectItemCommand}"
+                CommandParameter="1">
+             <Button.Triggers>
+                         <DataTrigger TargetType="Button"
+                                      Binding="{Binding PositionSelected}"
+                                      Value="1">
+                    <Setter Property="Style" Value="{StaticResource ButtonStyle}" />
+                </DataTrigger>
+             </Button.Triggers>
+        </Button>
+
+       <CarouselView Grid.Column="0"
+                     Grid.ColumnSpan="2"
+                     Grid.Row="1"
+                     ItemTemplate="{StaticResource CarouselDataTemplateSelector}"
+                     IsSwipeEnabled="False"
+                     IsScrollAnimated="False"
+                     Position="{Binding PositionSelected}">
+           <CarouselView.ItemsSource>
+              <x:Array Type="{x:Type x:String}">
+                <x:String>1</x:String>
+                <x:String>2</x:String>
+              </x:Array>
+           </CarouselView.ItemsSource>
+        </CarouselView>
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HideShowXF.MainPageControlTemplate"
+             xmlns:View="clr-namespace:HideShowXF.Views.Templates"
+             ControlTemplate="{DynamicResource Tab1View}">
+    <ContentPage.Triggers>
+           <DataTrigger TargetType="ContentPage"
+                        Binding="{Binding PositionSelected}"
+                        Value="2">
+            <Setter Property="ControlTemplate" Value="{DynamicResource Tab2View}" />
+        </DataTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="Tab1View">
+                 <View:Tab1View />
+            </ControlTemplate>
+             <ControlTemplate x:Key="Tab2View">
+                 <View:Tab2View />
+            </ControlTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="20"
+                 Orientation="Horizontal">
+
+        <Button Text="Tab1"
+                Style="{StaticResource ButtonDisabledStyle}"
+                Command="{Binding SelectItemCommand}"
+                CommandParameter="1">
+            <Button.Triggers>
+                         <DataTrigger TargetType="Button"
+                                      Binding="{Binding PositionSelected}"
+                                      Value="1">
+                    <Setter Property="Style" Value="{StaticResource ButtonStyle}" />
+                </DataTrigger>
+             </Button.Triggers>
+        </Button>
+
+        <Button Text="Tab2"
+                Style="{StaticResource ButtonDisabledStyle}"
+                Command="{Binding SelectItemCommand}"
+                CommandParameter="2">
+             <Button.Triggers>
+                         <DataTrigger TargetType="Button"
+                                      Binding="{Binding PositionSelected}"
+                                      Value="2">
+                    <Setter Property="Style" Value="{StaticResource ButtonStyle}" />
+                </DataTrigger>
+             </Button.Triggers>
+        </Button>
+    </StackLayout>
+</ContentPage>
